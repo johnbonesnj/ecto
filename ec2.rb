@@ -1,7 +1,7 @@
-require File.expand_path(File.dirname(__FILE__) + './config')
+require File.expand_path(File.dirname(__FILE__) + './ecto/config')
 
 require 'net/http'
-gem 'net-ssh', '~> 2.1.4'
+#gem 'net-ssh', '~> 2.1.4'
 require 'net/ssh'
 
 instance = key_pair = group = nil
@@ -26,7 +26,7 @@ begin
   end
   puts "Using AMI: #{image.id}"
   key_pair = ec2.key_pairs.create("ruby-sample-#{Time.now.to_i}")
-  puts "Generated keypair #{key_pain.name}, fingerprint: #{key_pain.fingerprint}"
+  puts "Generated keypair #{key_pair.name}, fingerprint: #{key_pair.fingerprint}"
 # open SSH access
   group = ec2.security_groups.create("ruby-sample-#{Time.now.to_i}")
   group.authorize_ingress(:tcp, 22, "0.0.0.0/0")
