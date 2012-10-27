@@ -6,14 +6,6 @@ require 'net/ssh'
 
 instance = key_pair = group = nil
 region = 'us-east-1'
-config_file = File.join(File.dirname(__FILE__), "config.yml")
-unless File.exist? config_file
-  puts <<EOF
-No config file
-EOF
-  exit 1
-end
-yconfig = YAML.load(File.read config_file)
 
 begin
   ec2 = AWS::EC2.new
@@ -34,10 +26,10 @@ begin
     amazon_linux.to_a.sort_by(&:name).last
   end
   puts "Using AMI: #{image.id}"
-  key_pair = ec2.key_pairs.create("#{yconfig["name"]}")
+  key_pair = ec2.key_pairs.create("ruby-sample-#{Time.now.to_i}")
   puts "Generated keypair #{key_pair.name}, fingerprint: #{key_pair.fingerprint}"
 # open SSH access
-  group = ec2.security_groups.create("#{yconfig["name"]}")
+  group = ec2.security_groups.create("ruby-sample-#{Time.now.to_i}")
   group.authorize_ingress(:tcp, 22, "0.0.0.0/0")
   puts "Using security group: #{group.name}"
 

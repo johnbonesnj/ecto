@@ -1,3 +1,2 @@
+name: script-test
 
-access_key_id:ENV['EC2_ACCESS_KEY']
-secret_access_key:ENV['EC2_SECRET_KEY']
