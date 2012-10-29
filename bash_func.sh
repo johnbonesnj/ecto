@@ -5,7 +5,7 @@
 # Copyright (c) 2010 Linode LLC / Christopher S. Aker <caker@linode.com>
 # All rights reserved.
 #
-# Redistribution and use in source and binary forms, with or without modification, 
+# Redistribution and use in source and binary forms, with or without modification,
 # are permitted provided that the following conditions are met:
 #
 # * Redistributions of source code must retain the above copyright notice, this
@@ -37,7 +37,7 @@
 function system_update {
 	apt-get update
 	apt-get -y install aptitude
-	aptitude -y full-upgrade
+	#aptitude -y full-upgrade
 }
 
 function system_primary_ip {
@@ -120,7 +120,7 @@ function apache_tune {
 function apache_virtualhost {
 	# Configures a VirtualHost
 
-	# $1 - required - the hostname of the virtualhost to create 
+	# $1 - required - the hostname of the virtualhost to create
 
 	if [ ! -n "$1" ]; then
 		echo "apache_virtualhost() requires the hostname as the first argument"
@@ -260,7 +260,7 @@ function mysql_create_user {
 
 function mysql_grant_user {
 	# $1 - the mysql root password
-	# $2 - the user to bestow privileges 
+	# $2 - the user to bestow privileges
 	# $3 - the database
 
 	if [ ! -n "$1" ]; then
@@ -358,8 +358,8 @@ function goodstuff {
 	# Installs the REAL vim, wget, less, and enables color root prompt and the "ll" list long alias
 
 	aptitude -y install wget vim less
-	sed -i -e 's/^#PS1=/PS1=/' /root/.bashrc # enable the colorful root bash prompt
-	sed -i -e "s/^#alias ll='ls -l'/alias ll='ls -al'/" /root/.bashrc # enable ll list long alias <3
+	sed -i -e 's/^#PS1=/PS1=/' /home/ubuntu/.bashrc # enable the colorful root bash prompt
+	sed -i -e "s/^#alias ll='ls -l'/alias ll='ls -al'/" /home/ubuntu/.bashrc # enable ll list long alias <3
 }
 
 
